@@ -1,0 +1,6 @@
+torch
+transformers
+numpy
+sounddevice
+scipy
+coqui-tts
