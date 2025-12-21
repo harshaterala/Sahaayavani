@@ -1,0 +1,16 @@
+{
+  "Ayushman Bharat": {
+    "age_min": 18,
+    "income_max": 200000,
+    "state": ["Telangana"],
+    "benefits": "Free health coverage up to 5 lakhs",
+    "documents": ["Aadhaar", "Income Certificate"]
+  },
+  "PM Jan Dhan Yojana": {
+    "age_min": 18,
+    "income_max": 300000,
+    "state": ["Telangana"],
+    "benefits": "Zero balance bank account",
+    "documents": ["Aadhaar"]
+  }
+}
