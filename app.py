@@ -10,6 +10,33 @@ from audio.stt import listen_and_transcribe
 from audio.tts import speak
 from memory.session_memory import memory  # Import memory to reset it
 
+def run_once():
+    """
+    Runs a single listen → think → speak cycle.
+    Returns (user_text, agent_response) or (None, None)
+    """
+
+    # Prevent mic from catching TTS tail
+    time.sleep(0.5)
+
+    user_text, confidence = listen_and_transcribe()
+
+    if confidence < 0.6 or not user_text.strip():
+        if user_text.strip():
+            err_msg = "క్షమించండి, మీ మాటలు సరిగ్గా వినిపించలేదు. దయచేసి మళ్లీ చెప్పండి."
+            speak(err_msg)
+        return None, None
+
+    # Exit keywords (UI can also handle this)
+    if any(word in user_text.lower() for word in ["ఆపండి", "బై", "సెల్వు", "stop", "bye"]):
+        exit_msg = "ధన్యవాదములు. మళ్లీ కలుద్దాం."
+        speak(exit_msg)
+        return user_text, exit_msg
+
+    response = run_agent(user_text)
+    speak(response)
+
+    return user_text, response
 
 def main():
     # Force UTF-8 for Telugu characters in terminal
@@ -25,18 +52,9 @@ def main():
     speak(welcome)
 
     while True:
-        # Prevent mic from catching TTS tail
-        time.sleep(0.5)
+        user_text, response = run_once()
 
-        # 1. Capture User Speech
-        user_text, confidence = listen_and_transcribe()
-
-        # 2. Handle Silence or Low Confidence
-        if confidence < 0.6 or not user_text.strip():
-            if user_text.strip():
-                err_msg = "క్షమించండి, మీ మాటలు సరిగ్గా వినిపించలేదు. దయచేసి మళ్లీ చెప్పండి."
-                print(f"🤖 AGENT: {err_msg}")
-                speak(err_msg)
+        if not user_text:
             continue
 
         # 3. Exit keywords
@@ -79,6 +97,7 @@ def main():
             speak(closing)
             memory.clear()
             break
+
 
 
 if __name__ == "__main__":

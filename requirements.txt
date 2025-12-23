@@ -4,3 +4,5 @@ numpy
 sounddevice
 scipy
 coqui-tts
+gTTS
+pygame
