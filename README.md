@@ -62,7 +62,7 @@ This design prioritizes **accuracy, transparency, and production feasibility**.
 
 ## 📁 Project Structure
 
-```text
+```
 Agentic-Voice-Welfare-System/
 ├── app.py                   # Core application (CLI + agent runtime)
 ├── ui.py                    # Streamlit UI for demo and interaction
@@ -78,97 +78,106 @@ Agentic-Voice-Welfare-System/
 │   └── session_memory.py    # Per-session conversation memory
 ├── requirements.txt
 └── README.md
-'''
+```
 
-⚙️ Setup & Execution
-1️⃣ Clone the Repository
-bash
-Copy code
-git clone https://github.com/<your-username>/Agentic-Voice-Welfare-System.git
+---
+
+## ⚙️ Setup & Execution
+
+### 1️⃣ Clone the Repository
+```bash
+git clone https://github.com/harshaterala/Sahaayavani.git
 cd Agentic-Voice-Welfare-System
-2️⃣ Create and Activate Virtual Environment
-bash
-Copy code
+```
+
+### 2️⃣ Create and Activate Virtual Environment
+```bash
 python -m venv venv
-Windows (PowerShell):
+```
 
-powershell
-Copy code
+**Windows (PowerShell):**
+```powershell
 venv\Scripts\activate
-Mac/Linux:
+```
 
-bash
-Copy code
+**Mac/Linux:**
+```bash
 source venv/bin/activate
-3️⃣ Install Dependencies
-bash
-Copy code
+```
+
+### 3️⃣ Install Dependencies
+```bash
 pip install -r requirements.txt
 pip install google-genai SpeechRecognition pyaudio streamlit
-4️⃣ Set Environment Variables
+```
+
+### 4️⃣ Set Environment Variables
 The system uses Google Gemini for language generation.
 
-Windows (PowerShell):
-
-powershell
-Copy code
+**Windows (PowerShell):**
+```powershell
 $env:GEMINI_API_KEY="your_api_key_here"
-Mac/Linux:
+```
 
-bash
-Copy code
+**Mac/Linux:**
+```bash
 export GEMINI_API_KEY="your_api_key_here"
-5️⃣ Run the Application
-CLI Mode
+```
 
-bash
-Copy code
+### 5️⃣ Run the Application
+**CLI Mode:**
+```bash
 python app.py
-UI Mode
+```
 
-bash
-Copy code
+**UI Mode:**
+```bash
 streamlit run ui.py
-🗣️ Example Interaction
-User (Telugu):
+```
 
-“నా వయసు 45 ఏళ్లు, నా ఆదాయం రెండు లక్షలు, మాది ఆంధ్రప్రదేశ్.”
+---
 
-Agent:
+## 🗣️ Example Interaction
 
-Extracts structured attributes
+**User (Telugu):**
+> "నా వయసు 45 ఏళ్లు, నా ఆదాయం రెండు లక్షలు, మాది ఆంధ్రప్రదేశ్."
 
-Checks eligibility via tools
+**Agent:**
+1. Extracts structured attributes
+2. Checks eligibility via tools
+3. Responds with applicable schemes or a clear explanation if none apply
+4. Speaks the response in Telugu
 
-Responds with applicable schemes or a clear explanation if none apply
+---
 
-Speaks the response in Telugu
+## 🛡️ Requirement Coverage
 
-🛡️ Requirement Coverage
-Requirement	Status
-Voice-first interaction	✅
-Native Telugu language pipeline	✅
-Agentic reasoning (Planner–Executor loop)	✅
-Tool usage (Eligibility + Knowledge Base)	✅
-Conversation memory across turns	✅
-Failure handling & recovery	✅
+| Requirement | Status |
+|-------------|--------|
+| Voice-first interaction | ✅ |
+| Native Telugu language pipeline | ✅ |
+| Agentic reasoning (Planner–Executor loop) | ✅ |
+| Tool usage (Eligibility + Knowledge Base) | ✅ |
+| Conversation memory across turns | ✅ |
+| Failure handling & recovery | ✅ |
 
-🚀 Future Extensions
-Integration with real government APIs
+---
 
-Retrieval-Augmented Generation (RAG) over official scheme documents
+## 🚀 Future Extensions
+- Integration with real government APIs
+- Retrieval-Augmented Generation (RAG) over official scheme documents
+- Multilingual support (Tamil, Kannada, Hindi)
+- Persistent storage (SQLite / cloud backend)
+- Mobile-friendly deployment
 
-Multilingual support (Tamil, Kannada, Hindi)
+---
 
-Persistent storage (SQLite / cloud backend)
-
-Mobile-friendly deployment
-
-👨‍💻 Author
-T Harshavardhan
-Final-year BTech – Computer Science (AI & ML)
+## 👨‍💻 Author
+**T Harshavardhan**  
+Final-year BTech – Computer Science (AI & ML)  
 Interests: Voice AI, Agentic Systems, Applied ML
 
-📜 License
-This project is intended for educational and demonstration purposes.
+---
 
+## 📜 License
+This project is intended for educational and demonstration purposes.
