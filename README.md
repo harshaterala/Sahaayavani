@@ -1,211 +1,171 @@
-# 🗣️ SahaayaVaani – Voice-First Telugu Welfare Assistant
+# 🎙️ SahaayaVaani – Voice-First Telugu Welfare Assistant
 
-**SahaayaVaani** is a **voice-first, Telugu-native, agentic AI assistant** designed to help citizens identify their eligibility for Indian government welfare schemes using **natural speech**.
+**SahaayaVaani** is a **voice-first, Telugu-native, agentic AI system** designed to help citizens identify their eligibility for Indian government welfare schemes using **natural spoken interaction**.
 
-Built with a **Planner–Executor–Memory** workflow, the system is designed for **real-world public service kiosks** and assisted-access environments, enabling **end-to-end voice interaction**:
+The system is built to simulate real-world **public service kiosks** and assisted-access environments, where users may not be comfortable with typing, reading, or navigating complex digital interfaces.
 
 > **Speech → Reasoning → Tools → Speech**
 
 ---
 
-## 🎯 Key Features
+## 🎯 Key Capabilities
 
 ### 🎙️ Voice-First Interaction
+Users interact **entirely through voice**, making the system accessible to non-technical and low-literacy users.
 
-Users interact **entirely through voice**—no typing, reading, or technical literacy required.
-
-### 🗣️ Native Telugu Support
-
-Complete Telugu pipeline:
-
-* Speech-to-Text (STT)
-* Telugu-native reasoning
-* Text-to-Speech (TTS)
+### 🗣️ Native Telugu Pipeline
+The system operates end-to-end in Telugu:
+- Speech-to-Text (STT)
+- Telugu-aware reasoning
+- Text-to-Speech (TTS)
 
 ### 🤖 Agentic Workflow
+Implements a clear **Planner–Executor–Memory** loop:
+- The agent plans the next step based on conversation state
+- Tools are invoked for eligibility checking
+- Responses are validated and refined before being spoken
 
-Implements an **explicit agent orchestration loop**:
-
-* Planner decides next action
-* Executor invokes tools
-* Evaluator validates outcomes
-  Local reasoning is used for speed, with LLMs leveraged for richer explanations.
+Local logic is used for structured reasoning, while LLMs are leveraged for fluent and natural explanations.
 
 ### 🧠 Conversation Memory
+- Persists user attributes (age, income, state) across turns
+- Detects missing or contradictory information
+- Supports multi-user sessions with explicit memory reset
 
-* Remembers user attributes (age, income, state) across turns
-* Detects contradictions and asks for clarification
-* Supports multi-user sessions
+### 🧰 Tool-Driven Design
+- **Eligibility Engine** – Rule-based matching against scheme criteria
+- **Scheme Knowledge Base** – Structured local representation of welfare schemes
 
-### 🧰 Integrated Tools
-
-* **Eligibility Engine** – Rule-based eligibility matching
-* **Scheme Knowledge Base (KB)** – Structured data on government schemes
-
-### ⚠️ Robust Error Handling
-
-Gracefully handles:
-
-* Silence and background noise
-* Incomplete or conflicting information
-* Recognition uncertainty with intelligent fallbacks
+### ⚠️ Robust Failure Handling
+Gracefully manages:
+- Silence or background noise
+- Low-confidence speech recognition
+- Partial or ambiguous inputs
+- Intelligent recovery prompts instead of hallucinated answers
 
 ---
 
 ## 🏗️ System Architecture
 
-The assistant follows a structured, low-latency pipeline:
+The assistant follows a low-latency, modular pipeline:
 
-1. **Input** – User speaks in Telugu
-2. **Recognition** – STT converts speech to Telugu text
-3. **Extraction** – Local logic extracts age, income, and state
-4. **Reasoning** – Agent orchestrator plans and invokes tools
-5. **Synthesis** – LLM generates a friendly Telugu explanation
-6. **Output** – TTS converts the response back to speech
+1. **Input** – User speaks in Telugu  
+2. **Recognition** – STT converts speech to Telugu text  
+3. **Extraction** – Local logic extracts age, income, and state  
+4. **Reasoning** – Agent orchestrator plans and invokes tools  
+5. **Synthesis** – LLM generates a natural Telugu explanation  
+6. **Output** – TTS converts the response back to speech  
 
-This design ensures **accuracy, speed, and production feasibility**.
+This design prioritizes **accuracy, transparency, and production feasibility**.
 
 ---
 
 ## 📁 Project Structure
 
 ```text
-sahaayavaani/
-├── app.py                   # Entry point (Main Application Loop)
+Agentic-Voice-Welfare-System/
+├── app.py                   # Core application (CLI + agent runtime)
+├── ui.py                    # Streamlit UI for demo and interaction
 ├── agent/
-│   └── orchestrator.py      # Agent logic (Reasoning + Tool Dispatch)
+│   └── orchestrator.py      # Agent planning and tool orchestration
 ├── audio/
 │   ├── stt.py               # Speech-to-Text (Telugu)
 │   └── tts.py               # Text-to-Speech (Telugu)
 ├── tools/
-│   ├── eligibility.py       # Rule-based Eligibility Engine
-│   └── scheme_kb.py         # Government Scheme Knowledge Base
+│   ├── eligibility.py       # Rule-based eligibility engine
+│   └── scheme_kb.py         # Local scheme knowledge base
 ├── memory/
-│   └── session_memory.py    # Per-user conversation context
-├── requirements.txt         # Project dependencies
-└── README.md                # Project documentation
-```
-
----
-
-## ⚙️ Setup Instructions
-
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/your-username/sahaayavaani.git
-cd sahaayavaani
-```
-
-### 2️⃣ Create a Virtual Environment
-
-```bash
+│   └── session_memory.py    # Per-session conversation memory
+├── requirements.txt
+└── README.md
+⚙️ Setup & Execution
+1️⃣ Clone the Repository
+bash
+Copy code
+git clone https://github.com/<your-username>/Agentic-Voice-Welfare-System.git
+cd Agentic-Voice-Welfare-System
+2️⃣ Create and Activate Virtual Environment
+bash
+Copy code
 python -m venv venv
-```
+Windows (PowerShell):
 
-**Activate the environment:**
-
-* **Windows (PowerShell)**
-
-```powershell
+powershell
+Copy code
 venv\Scripts\activate
-```
+Mac/Linux:
 
-* **Mac/Linux**
-
-```bash
+bash
+Copy code
 source venv/bin/activate
-```
-
-### 3️⃣ Install Dependencies
-
-```bash
+3️⃣ Install Dependencies
+bash
+Copy code
 pip install -r requirements.txt
-```
+pip install google-genai SpeechRecognition pyaudio streamlit
+4️⃣ Set Environment Variables
+The system uses Google Gemini for language generation.
 
-### 4️⃣ Set Environment Variables
+Windows (PowerShell):
 
-The system uses a **Gemini API key** for advanced explanation generation.
-
-* **Windows (PowerShell)**
-
-```powershell
+powershell
+Copy code
 $env:GEMINI_API_KEY="your_api_key_here"
-```
+Mac/Linux:
 
-* **Mac/Linux**
-
-```bash
+bash
+Copy code
 export GEMINI_API_KEY="your_api_key_here"
-```
+5️⃣ Run the Application
+CLI Mode
 
-### 5️⃣ Run the Application
-
-```bash
+bash
+Copy code
 python app.py
-```
+UI Mode
 
----
+bash
+Copy code
+streamlit run ui.py
+🗣️ Example Interaction
+User (Telugu):
 
-## 🗣️ How to Use
+“నా వయసు 45 ఏళ్లు, నా ఆదాయం రెండు లక్షలు, మాది ఆంధ్రప్రదేశ్.”
 
-1. **Greeting**
-   The agent greets you in Telugu and requests basic details.
+Agent:
 
-2. **Speak Naturally**
-   Example:
+Extracts structured attributes
 
-   > *"నా వయసు 45 ఏళ్లు, నా ఆదాయం రెండు లక్షలు, మాది ఆంధ్రప్రదేశ్."*
+Checks eligibility via tools
 
-3. **Processing**
+Responds with applicable schemes or a clear explanation if none apply
 
-   * Telugu numbers and phrases are normalized
-   * Eligibility is checked using integrated tools
+Speaks the response in Telugu
 
-4. **Result**
-   The agent announces:
+🛡️ Requirement Coverage
+Requirement	Status
+Voice-first interaction	✅
+Native Telugu language pipeline	✅
+Agentic reasoning (Planner–Executor loop)	✅
+Tool usage (Eligibility + Knowledge Base)	✅
+Conversation memory across turns	✅
+Failure handling & recovery	✅
 
-   * Eligible schemes
-   * Required documents
-     via **voice output**
+🚀 Future Extensions
+Integration with real government APIs
 
-5. **Multi-User Support**
-   The agent can start a new eligibility check for another user before closing the session.
+Retrieval-Augmented Generation (RAG) over official scheme documents
 
----
+Multilingual support (Tamil, Kannada, Hindi)
 
-## 🛡️ Compliance Checklist
+Persistent storage (SQLite / cloud backend)
 
-| Requirement                          | Status |
-| ------------------------------------ | ------ |
-| Voice-first interaction              | ✅      |
-| Native Telugu language pipeline      | ✅      |
-| Agentic workflow (reasoning + tools) | ✅      |
-| Dual tool usage (Eligibility + KB)   | ✅      |
-| Conversation memory                  | ✅      |
-| Failure & silence handling           | ✅      |
+Mobile-friendly deployment
 
----
+👨‍💻 Author
+T Harshavardhan
+Final-year BTech – Computer Science (AI & ML)
+Interests: Voice AI, Agentic Systems, Applied ML
 
-## 🚀 Future Enhancements
-
-* **Apply-Now Workflow** – Direct integration with official government portals
-* **Mobile Authentication** – Phone number capture for SMS follow-ups
-* **Multilingual Expansion** – Kannada, Tamil, Hindi support
-* **Live APIs** – Real-time scheme updates from government databases
-
----
-
-## 👨‍💻 Author
-
-**Jahnavi Dingari**
-Voice-First AI | Data & AI Engineering
-
----
-
-## 📜 License
-
-This project is intended for **educational and demonstration purposes**.
-
----
-
+📜 License
+This project is intended for educational and demonstration purposes.
